@@ -17,7 +17,9 @@ const Banner = () => {
               We provide the best webinars for you to learn and grow. We have a
               wide range of topics to choose from. Get started today!
             </p>
-            <button className="btn btn-primary">Get Started</button>
+            <a href="#events" className="btn btn-primary">
+              Get Started
+            </a>
           </div>
         </div>
       </div>
