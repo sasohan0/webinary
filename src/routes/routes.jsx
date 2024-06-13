@@ -6,6 +6,8 @@ import Register from "../pages/Register";
 import Sidebar from "../components/Sidebar";
 import EventDetails from "../pages/EventDetails";
 import Booking from "../pages/Booking";
+import Payment from "../pages/Payment";
+import UserBookings from "../pages/UserBookings";
 
 const router = createBrowserRouter([
   {
@@ -30,7 +32,15 @@ const router = createBrowserRouter([
             path: "/booking/:id",
             element: <Booking />,
             loader: ({ params }) =>
-              fetch(`http://localhost:5000/events/${params.id}`),
+              fetch(`http://localhost:5000/booking/${params.id}`),
+          },
+          {
+            path: "/bookings",
+            element: <UserBookings />,
+          },
+          {
+            path: "/booking/payment/:id",
+            element: <Payment />,
           },
         ],
       },
