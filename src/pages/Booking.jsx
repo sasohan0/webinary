@@ -92,13 +92,13 @@ const Booking = () => {
   return (
     <div className="md:p-10">
       <div className="hero min-h-screen bg-base-200">
-        <div className="hero-content p-0 md:1rem flex-col lg:flex-row">
+        <div className="hero-content p-0 md:p-4 flex-col lg:flex-row">
           <div className="w-auto md:mx-auto">
             <form
               onSubmit={handleSUbmit}
               className="hero min-h-screen bg-base-200"
             >
-              <div className="hero-content flex-col lg:flex-row-reverse">
+              <div className="hero-content p-0 md:p-4 flex-col lg:flex-row-reverse">
                 <div className="text-center lg:text-left">
                   <h1 className="text-4xl font-bold">Book now!</h1>
                   <img

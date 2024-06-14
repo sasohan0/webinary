@@ -24,7 +24,7 @@ const Dashboard = () => {
 
   return (
     <div className="hero min-h-screen bg-base-200">
-      <div className="hero-content flex-col lg:flex-row">
+      <div className="hero-content p-0 md:p-4 flex-col lg:flex-row">
         <div className="avatar">
           <div className="w-44 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
             <img
