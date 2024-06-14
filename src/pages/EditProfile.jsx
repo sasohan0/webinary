@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 import { getAuth, updatePassword } from "firebase/auth";
 import Swal from "sweetalert2";
@@ -10,10 +10,11 @@ export default function EditProfile() {
   const user = auth.currentUser;
   const [data, setData] = useState([]);
   const { id } = useParams();
+  const navigate = useNavigate();
   console.log("EditProfile", id);
 
   useEffect(() => {
-    fetch(`http://localhost:5000/user/get/${id}`, {
+    fetch(`https://webinary-server.onrender.com/user/get/${id}`, {
       headers: {
         "Content-Type": "application/json",
         authorization: `Bearer ${token}`,
@@ -67,7 +68,7 @@ export default function EditProfile() {
       denyButtonText: `No`,
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`http://localhost:5000/user/${data?.email}`, {
+        fetch(`https://webinary-server.onrender.com/user/${data?.email}`, {
           method: "PATCH",
           headers: {
             "Content-Type": "application/json",
@@ -78,6 +79,7 @@ export default function EditProfile() {
           .then((res) => res.json())
           .then((data) => console.log("patched:", data));
         Swal.fire("Profile Updated!", "", "success");
+        navigate("/dashboard");
       } else if (result.isDenied) {
         Swal.fire("Profile not updated", "", "info");
       }

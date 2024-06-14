@@ -25,7 +25,7 @@ const AddProduct = () => {
       denyButtonText: `No`,
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch("http://localhost:5000/events", {
+        fetch("https://webinary-server.onrender.com/events", {
           method: "POST",
           headers: {
             "Content-type": "application/json",

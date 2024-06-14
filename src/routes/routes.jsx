@@ -29,7 +29,7 @@ const router = createBrowserRouter([
             path: "/events/:id",
             element: <EventDetails />,
             loader: ({ params }) =>
-              fetch(`http://localhost:5000/events/${params.id}`),
+              fetch(`https://webinary-server.onrender.com/events/${params.id}`),
           },
           {
             path: "/booking/:id",
@@ -40,7 +40,9 @@ const router = createBrowserRouter([
               </PrivateRoutes>
             ),
             loader: ({ params }) =>
-              fetch(`http://localhost:5000/booking/${params.id}`),
+              fetch(
+                `https://webinary-server.onrender.com/booking/${params.id}`
+              ),
           },
           {
             path: "/bookings",

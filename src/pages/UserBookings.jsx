@@ -16,7 +16,7 @@ const UserBookings = () => {
   const [filteredResults, setFilteredResults] = useState([]);
   const [searchInput, setSearchInput] = useState("");
   useEffect(() => {
-    fetch("http://localhost:5000/bookings", {
+    fetch("https://webinary-server.onrender.com/bookings", {
       method: "GET",
       headers: {
         "Content-type": "application/json",

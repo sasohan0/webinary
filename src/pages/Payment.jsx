@@ -13,7 +13,7 @@ const Payment = () => {
   const { id } = useParams();
 
   useEffect(() => {
-    fetch(`http://localhost:5000/booking/payment/${id}`, {
+    fetch(`https://webinary-server.onrender.com/booking/payment/${id}`, {
       method: "GET",
       headers: {
         authorization: `Bearer ${localStorage.getItem("token")}`,

@@ -16,7 +16,7 @@ const CheckoutForm = ({ booking }) => {
   console.log("from checkout", bookingPrice);
 
   useEffect(() => {
-    fetch("http://localhost:5000/create-payment-intent", {
+    fetch("https://webinary-server.onrender.com/create-payment-intent", {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -78,7 +78,7 @@ const CheckoutForm = ({ booking }) => {
         booking: _id,
         transactionId: paymentIntent.id,
       };
-      fetch(`http://localhost:5000/bookings/${_id}`, {
+      fetch(`https://webinary-server.onrender.com/bookings/${_id}`, {
         method: "PATCH",
         headers: {
           "content-type": "application/json",

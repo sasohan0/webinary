@@ -40,7 +40,7 @@ const Booking = () => {
     }).then((result) => {
       /* Read more about isConfirmed, isDenied below */
       if (result.isConfirmed) {
-        fetch("http://localhost:5000/bookings", {
+        fetch("https://webinary-server.onrender.com/bookings", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -50,7 +50,7 @@ const Booking = () => {
         })
           .then((res) => res.json())
           .then((d) => {
-            fetch(`http://localhost:5000/events/${_id}`, {
+            fetch(`https://webinary-server.onrender.com/events/${_id}`, {
               method: "PATCH",
               headers: {
                 "Content-type": "application/json",
@@ -61,7 +61,7 @@ const Booking = () => {
               .then((res) => res.json())
               .then((a) => {
                 if (d && a) {
-                  Swal.fire("booked!", "", "success");
+                  Swal.fire("booked! Now Complete the Payment", "", "success");
                   navigate("/bookings");
                 } else {
                   Swal.fire("Not Booked", "", "info");
