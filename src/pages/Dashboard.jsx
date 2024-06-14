@@ -33,8 +33,8 @@ const Dashboard = () => {
             />
           </div>
         </div>
-        <div className="flex justify-center items-center flex-col gap-0">
-          <h1 className="text-5xl font-bold text-center">
+        <div className="flex justify-center items-center flex-col flex-wrapn gap-0">
+          <h1 className="text-3xl font-bold text-center">
             {userInfo?.name}
             {user?.emailVerified ? (
               <div className="py-2">
