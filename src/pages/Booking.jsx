@@ -1,9 +1,11 @@
-import { useLoaderData } from "react-router-dom";
+import { useLoaderData, useNavigate } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
+import Swal from "sweetalert2";
 
 const Booking = () => {
   const booking = useLoaderData();
   const { user } = useAuth();
+  const navigate = useNavigate();
   const { _id, title, brand, price, description, image_url, slots, available } =
     booking;
 
@@ -29,18 +31,47 @@ const Booking = () => {
       bookingEmail: user?.email,
     };
 
-    fetch("http://localhost:5000/bookings", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        authorization: `Bearer ${token}`,
-      },
-      body: JSON.stringify(bookingInfo),
-    })
-      .then((res) => res.json())
-      .then(() => {
-        form.reset();
-      });
+    Swal.fire({
+      title: "Do you want book the event?",
+      showDenyButton: true,
+      showCancelButton: false,
+      confirmButtonText: "Yes",
+      denyButtonText: `No`,
+    }).then((result) => {
+      /* Read more about isConfirmed, isDenied below */
+      if (result.isConfirmed) {
+        fetch("http://localhost:5000/bookings", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify(bookingInfo),
+        })
+          .then((res) => res.json())
+          .then(() => {
+            fetch(`http://localhost:5000/events/${_id}`, {
+              method: "PATCH",
+              headers: {
+                "Content-type": "application/json",
+                authorization: `Bearer ${token}`,
+              },
+              body: JSON.stringify(data),
+            })
+              .then((res) => res.json())
+              .then((data) => {
+                Swal.fire("booked!", "", "success");
+                navigate("/bookings");
+              });
+          });
+      } else if (result.isDenied) {
+        Swal.fire("Not Booked", "", "info");
+      }
+    });
+
+    const data = {
+      available: available - quantity,
+    };
 
     //  I previously implemented JWT authenctication while Login. But if the token is once deleted the user cannot log in anymore so I commented it
     // fetch(`https://waste-not-backend.onrender.com/user/${email}`, {
@@ -55,10 +86,10 @@ const Booking = () => {
   };
 
   return (
-    <div className="p-10">
+    <div className="md:p-10">
       <div className="hero min-h-screen bg-base-200">
-        <div className="hero-content flex-col lg:flex-row">
-          <div className="w-auto mx-auto">
+        <div className="hero-content p-0 md:1rem flex-col lg:flex-row">
+          <div className="w-auto md:mx-auto">
             <form
               onSubmit={handleSUbmit}
               className="hero min-h-screen bg-base-200"
@@ -67,11 +98,11 @@ const Booking = () => {
                 <div className="text-center lg:text-left">
                   <h1 className="text-4xl font-bold">Book now!</h1>
                   <img
-                    src="https://img.daisyui.com/images/stock/photo-1635805737707-575885ab0820.jpg"
-                    className="max-w-sm rounded-lg shadow-2xl"
+                    src={image_url}
+                    className="w-full rounded-lg shadow-2xl"
                   />
                 </div>
-                <div className="card shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
+                <div className="card w-auto shadow-2xl bg-base-100">
                   <div className="card-body">
                     <div className="form-control">
                       <label className="label">

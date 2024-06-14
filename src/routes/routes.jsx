@@ -8,6 +8,9 @@ import EventDetails from "../pages/EventDetails";
 import Booking from "../pages/Booking";
 import Payment from "../pages/Payment";
 import UserBookings from "../pages/UserBookings";
+import PrivateRoutes from "./privateRoutes/PrivateRoutes";
+import Dashboard from "../pages/Dashboard";
+import EditProfile from "../pages/EditProfile";
 
 const router = createBrowserRouter([
   {
@@ -30,17 +33,50 @@ const router = createBrowserRouter([
           },
           {
             path: "/booking/:id",
-            element: <Booking />,
+            element: (
+              <PrivateRoutes>
+                {" "}
+                <Booking />
+              </PrivateRoutes>
+            ),
             loader: ({ params }) =>
               fetch(`http://localhost:5000/booking/${params.id}`),
           },
           {
             path: "/bookings",
-            element: <UserBookings />,
+            element: (
+              <PrivateRoutes>
+                <UserBookings />
+              </PrivateRoutes>
+            ),
           },
           {
             path: "/booking/payment/:id",
-            element: <Payment />,
+            element: (
+              <PrivateRoutes>
+                {" "}
+                <Payment />{" "}
+              </PrivateRoutes>
+            ),
+          },
+          {
+            path: "/dashboard",
+            element: (
+              <PrivateRoutes>
+                {" "}
+                <Dashboard></Dashboard>
+              </PrivateRoutes>
+            ),
+          },
+          {
+            path: "dashboard/profile/edit/:id",
+            element: (
+              <PrivateRoutes>
+                <EditProfile />
+              </PrivateRoutes>
+            ),
+            // loader: ({ params }) =>
+            //   fetch(`https://waste-not-backend.onrender.com/user/get/${params.id}`),
           },
         ],
       },

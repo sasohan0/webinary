@@ -1,6 +1,6 @@
 import { Navigate, useLocation } from "react-router-dom";
-import useAuth from "../hooks/useAuth";
-import LoadingSpinner from "../components/LoadingSpinner";
+import useAuth from "../../hooks/useAuth";
+import LoadingSpinner from "../../components/LoadingSpinner";
 import Swal from "sweetalert2";
 
 const PrivateRoutes = ({ children }) => {

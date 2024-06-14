@@ -1,10 +1,12 @@
 /* eslint-disable react/prop-types */
 
+import { useState } from "react";
 import { Link } from "react-router-dom";
 
 // eslint-disable-next-line react/prop-types
 const SingleBookingCard = ({ booking }) => {
   const token = localStorage.getItem("token");
+  const [more, setMore] = useState(false);
   console.log(booking);
 
   const {
@@ -56,10 +58,24 @@ const SingleBookingCard = ({ booking }) => {
       <div className="card-body">
         <h2 className="card-title">{bookingTitle}</h2>
         <h3 className="text-xl font-semibold">{bookingBrand}</h3>
-        <h3 className="text-xl font-semibold">{bookingPrice}</h3>
-        <p>{bookingDescription}</p>
+        {bookingPrice === "0" ? (
+          <h3 className="text-xl font-semibold">Free</h3>
+        ) : (
+          <h3 className="text-xl font-semibold">{bookingPrice}</h3>
+        )}
+        <p>
+          {more ? bookingDescription : bookingDescription.slice(0, 100)}
+          {
+            <button onClick={() => setMore(!more)}>
+              <p className="ms-1  text-blue-600">
+                {" "}
+                {more ? "see less" : "...see more"}
+              </p>
+            </button>
+          }
+        </p>
         <div className="card-actions justify-end">
-          {paid ? (
+          {!paid && bookingPrice !== "0" ? (
             <button className="btn bg-indigo-500 text-white">
               <Link to={`/booking/payment/${_id}`}>Pay</Link>
             </button>
