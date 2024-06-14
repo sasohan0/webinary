@@ -38,4 +38,6 @@ Webinary is an event booking site made with Vite and React.js. It allows users t
 
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
-    Live Preview: [Webinary](https://we-binary.web.app/)
+## Live Preview:
+
+[Webinary](https://we-binary.web.app/)
