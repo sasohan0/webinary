@@ -49,9 +49,6 @@ const SingleBookingCard = ({ booking }) => {
 
   return (
     <div className="card w-96 bg-base-100 shadow-xl">
-      <span>
-        Added By: <div className="badge badge-neutral">{email}</div>
-      </span>
       <figure>
         <img src={bookingImage} alt="booking" />
       </figure>
@@ -61,7 +58,7 @@ const SingleBookingCard = ({ booking }) => {
         {bookingPrice === "0" ? (
           <h3 className="text-xl font-semibold">Free</h3>
         ) : (
-          <h3 className="text-xl font-semibold">{bookingPrice}</h3>
+          <h3 className="text-xl font-semibold">${bookingPrice}</h3>
         )}
         <p>
           {more ? bookingDescription : bookingDescription.slice(0, 100)}

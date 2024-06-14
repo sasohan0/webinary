@@ -1,5 +1,7 @@
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const CheckoutForm = ({ booking }) => {
   const stripe = useStripe();
@@ -9,7 +11,7 @@ const CheckoutForm = ({ booking }) => {
   const [processing, setProcessing] = useState(false);
   const [transactionId, setTransactionId] = useState("");
   const [clientSecret, setClientSecret] = useState("");
-
+  const navigate = useNavigate();
   const { _id, bookingPrice, email } = booking;
   console.log("from checkout", bookingPrice);
 
@@ -87,7 +89,13 @@ const CheckoutForm = ({ booking }) => {
         .then((res) => res.json())
         .then((data) => {
           setProcessing(false);
-          console.log(data);
+          Swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: "payment successful",
+            showConfirmButton: false,
+            timer: 1500,
+          }).then(() => navigate("/bookings"));
         });
     }
   };

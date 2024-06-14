@@ -49,7 +49,7 @@ const Booking = () => {
           body: JSON.stringify(bookingInfo),
         })
           .then((res) => res.json())
-          .then(() => {
+          .then((d) => {
             fetch(`http://localhost:5000/events/${_id}`, {
               method: "PATCH",
               headers: {
@@ -59,9 +59,13 @@ const Booking = () => {
               body: JSON.stringify(data),
             })
               .then((res) => res.json())
-              .then((data) => {
-                Swal.fire("booked!", "", "success");
-                navigate("/bookings");
+              .then((a) => {
+                if (d && a) {
+                  Swal.fire("booked!", "", "success");
+                  navigate("/bookings");
+                } else {
+                  Swal.fire("Not Booked", "", "info");
+                }
               });
           });
       } else if (result.isDenied) {

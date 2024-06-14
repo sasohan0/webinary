@@ -27,14 +27,23 @@ const Payment = () => {
     <div>
       <div className="card w-50 max-w-md bg-base-100 shadow-xl my-12">
         <div className="card-body">
-          <h2 className="card-title">Please Pay for {booking?.bookingTitle}</h2>
+          <h2 className="">
+            Please Pay for <br />
+            <p className="card-title italic">{booking?.bookingTitle}</p>
+          </h2>
           <p>
-            <span className="text-orange-700">
-              {booking?.quantity}Tickets for the event
-            </span>{" "}
+            <p className="text-orange-700">
+              <p className="ms-1">{booking?.quantity}</p>Tickets
+            </p>{" "}
             at {booking?.slot}
           </p>
-          <p>Please pay: ${booking?.bookingPrice * booking?.quantity}</p>
+          <p>
+            Please pay: ${booking?.bookingPrice * booking?.quantity}{" "}
+            <small className="italic text-xs text-primary">
+              {" "}
+              ({booking?.quantity} * ${booking?.bookingPrice})
+            </small>
+          </p>
         </div>
       </div>
 
