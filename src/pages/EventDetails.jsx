@@ -39,11 +39,6 @@ const EventDetails = () => {
             <button className="btn bg-slate-700 text-white hover:text-black">
               <Link to={`/`}>Back to Events</Link>
             </button>
-            {email === currentUserEmail && (
-              <button className="btn bg-slate-700 text-white hover:text-black">
-                <Link to={`../../dashboard/my-products/edit/${_id}`}>Edit</Link>
-              </button>
-            )}
           </div>
         </div>
       </div>
